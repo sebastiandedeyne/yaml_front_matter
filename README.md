@@ -23,17 +23,15 @@ YamlFrontMatter.parse_file "hello_world.md"
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-1. Add `yaml_front_matter` to your list of dependencies in `mix.exs`:
+Add `yaml_front_matter` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:yaml_front_matter, "~> 0.1.0"}]
+  [{:yaml_front_matter, "~> 0.2.0"}]
 end
 ```
 
-2. Ensure `yaml_front_matter` is started before your application:
+Ensure `yaml_front_matter` is started before your application:
 
 ```elixir
 def application do
@@ -43,17 +41,17 @@ end
 
 ## Usage
 
-See [https://hexdocs.pm/yaml_front_matter](https://hexdocs.pm/yaml_front_matter)
+See [https://hexdocs.pm/yaml_front_matter/](https://hexdocs.pm/yaml_front_matter/)
 
- ## Changelog
- 
- Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
- 
- ## Testing
- 
- ``` bash
- $ mix test
- ```
+## Changelog
+
+Please see [CHANGELOG](https://github.com/sebastiandedeyne/yaml_front_matter/blob/master/CHANGELOG.md) for more information what has changed recently.
+
+## Testing
+
+``` bash
+$ mix test
+```
 
 ## Contributing
 
@@ -61,9 +59,9 @@ Pull requests are welcome!
 
 ## Credits
 
-- [Sebastian De Deyne](https://github.com/sebdedeyne)
+- [Sebastian De Deyne](https://github.com/sebastiandedeyne)
 - [All Contributors](../../contributors)
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please check the [LICENSE](https://github.com/sebastiandedeyne/yaml_front_matter/blob/master/LICENSE.md) for more information.
