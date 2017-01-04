@@ -10,7 +10,7 @@ defmodule YamlFrontMatter.Mixfile do
      description: "A YAML front matter parser for Elixir.",
      package: [
        name: :yaml_front_matter,
-       files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+       files: ["lib", "mix.exs", "README.md", "LICENSE.md"],
        maintainers: ["Sebastian De Deyne"],
        licenses: ["MIT"],
        links: %{"GitHub" => "https://github.com/sebastiandedeyne/yaml_front_matter"}],
