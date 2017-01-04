@@ -10,7 +10,7 @@ defmodule YamlFrontMatterTest do
     Hello, world
     """
     
-    {:ok, matter, body} = YamlFrontMatter.parse_string string
+    {:ok, matter, body} = YamlFrontMatter.parse string
 
     assert Map.size(matter) == 1
     assert matter["title"] == "Hello"
@@ -27,7 +27,7 @@ defmodule YamlFrontMatterTest do
     world
     """
     
-    {:ok, matter, body} = YamlFrontMatter.parse_string string
+    {:ok, matter, body} = YamlFrontMatter.parse string
 
     assert Map.size(matter) == 1
     assert matter["title"] == "Hello"
@@ -43,7 +43,7 @@ defmodule YamlFrontMatterTest do
     Hello, world
     """
     
-    {:error, _} = YamlFrontMatter.parse_string string
+    {:error, _} = YamlFrontMatter.parse string
   end
 
   test "it fails safely if there's no valid front matter" do
@@ -54,14 +54,6 @@ defmodule YamlFrontMatterTest do
     Hello, world
     """
     
-    {:error, _} = YamlFrontMatter.parse_string string
-  end
-
-  test "it can parse front matter from a file" do
-    {:ok, matter, body} = YamlFrontMatter.parse_file("test/fixtures/dummy.md")
-
-    assert Map.size(matter) == 1
-    assert matter["title"] == "Hello"
-    assert body == "Hello, world\n"
+    {:error, _} = YamlFrontMatter.parse string
   end
 end

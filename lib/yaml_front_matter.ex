@@ -1,12 +1,12 @@
 defmodule YamlFrontMatter do
   @moduledoc """
-  Parse a file or string containing front matter and a document body. Front 
-  matter is a block of yaml wrapped between two lines containing `---`.
-
+  Parse a file or string containing front matter and a document body. 
+  
+  Front matter is a block of yaml wrapped between two lines containing `---`.
   In this example, the front matter contains `title: Hello`, and the body is
   `Hello, world`:
 
-  ```
+  ```md
   ---
   title: Hello
   ---
@@ -16,33 +16,44 @@ defmodule YamlFrontMatter do
   After parsing the document, front matter is returned as a map, and the body as
   a string.
 
-  ## Examples
-
-  Returns `{:ok, matter, body}` on success
-
-    iex> YamlFrontMatter.parse_file "test/fixtures/dummy.md"
-    {:ok, %{"title" => "Hello"}, "Hello, world\\n"}
-
-    iex> YamlFrontMatter.parse_string "---\\ntitle: Hello\\n---\\nHello, world"
-    {:ok, %{"title" => "Hello"}, "Hello, world"}
-
-  Returns `{:error, error}` on failure
-
-    iex> YamlFrontMatter.parse_file "test/fixtures/idontexist.md"
-    {:error, :enoent}
-
-    iex> YamlFrontMatter.parse_string "---\\ntitle: Hello\\n--\\nHello, world"
-    {:error, :invalid_front_matter}
+  ```elixir
+  YamlFrontMatter.parse_file "hello_world.md"
+  {:ok, %{"title" => "Hello"}, "Hello, world"}    
+  ```
   """
 
+  @doc """
+  Read a file, parse it's contents, and return it's front matter and body.
+
+  Returns `{:ok, matter, body}` on success (`matter` is a map), or
+  `{:error, error}` on error.
+
+      iex> YamlFrontMatter.parse_file "test/fixtures/dummy.md"
+      {:ok, %{"title" => "Hello"}, "Hello, world\\n"}
+
+      iex> YamlFrontMatter.parse_file "test/fixtures/idontexist.md"
+      {:error, :enoent}
+  """
   def parse_file(path) do
     case File.read(path) do
-      {:ok, contents} -> parse_string(contents)
+      {:ok, contents} -> parse(contents)
       {:error, error} -> {:error, error}
     end
   end
 
-  def parse_string(string) do
+  @doc """
+  Parse a string and return it's front matter and body.
+
+  Returns `{:ok, matter, body}` on success (`matter` is a map), or
+  `{:error, error}` on error.
+
+      iex> YamlFrontMatter.parse "---\\ntitle: Hello\\n---\\nHello, world"
+      {:ok, %{"title" => "Hello"}, "Hello, world"}
+
+      iex> YamlFrontMatter.parse "---\\ntitle: Hello\\n--\\nHello, world"
+      {:error, :invalid_front_matter}
+  """
+  def parse(string) do
     string
     |> split_string
     |> process_parts
