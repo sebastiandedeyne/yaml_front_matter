@@ -1,5 +1,9 @@
 # YamlFrontMatter
 
+[![Travis](https://img.shields.io/travis/sebastiandedeyne/yaml_front_matter.svg)]()
+[![Hex.pm](https://img.shields.io/hexpm/dt/yaml_front_matter.svg)]()
+[![Hex.pm](https://img.shields.io/hexpm/v/yaml_front_matter.svg)]()
+
 Parse a file or string containing front matter and a document body. 
   
 Front matter is a block of yaml wrapped between two lines containing `---`.
