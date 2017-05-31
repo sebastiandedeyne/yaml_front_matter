@@ -18,9 +18,6 @@ defmodule YamlFrontMatter.Mixfile do
             source_url: "https://github.com/sebastiandedeyne/yaml_front_matter"]]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
     [applications: [:yaml_elixir]]
   end
