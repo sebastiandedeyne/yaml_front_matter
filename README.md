@@ -1,8 +1,8 @@
 # YamlFrontMatter
 
-[![Hex.pm](https://img.shields.io/hexpm/v/yaml_front_matter.svg)]()
-[![Hex.pm](https://img.shields.io/hexpm/dt/yaml_front_matter.svg)]()
-[![Travis](https://img.shields.io/travis/sebastiandedeyne/yaml_front_matter.svg)]()
+[![Hex.pm](https://img.shields.io/hexpm/v/yaml_front_matter.svg)](https://hex.pm/packages/yaml_front_matter)
+[![Hex.pm](https://img.shields.io/hexpm/dt/yaml_front_matter.svg)](https://hex.pm/packages/yaml_front_matter)
+[![Travis](https://img.shields.io/travis/sebastiandedeyne/yaml_front_matter.svg)](https://travis-ci.org/sebastiandedeyne/yaml_front_matter)
 
 Parse a file or string containing front matter and a document body. 
   

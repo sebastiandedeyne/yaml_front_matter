@@ -42,6 +42,36 @@ defmodule YamlFrontMatter do
   end
 
   @doc """
+  Read a file, parse it's contents, and return it's front matter and body.
+
+  Returns `{matter, body}` on success (`matter` is a map), throws on error.
+
+      iex> YamlFrontMatter.parse_file! "test/fixtures/dummy.md"
+      {%{"title" => "Hello"}, "Hello, world\\n"}
+
+      iex> try do
+      ...>   YamlFrontMatter.parse_file! "test/fixtures/idontexist.md"
+      ...> rescue
+      ...>   e in YamlFrontMatter.Error -> e.message
+      ...> end 
+      "File not found"
+
+      iex> try do
+      ...>   YamlFrontMatter.parse_file! "test/fixtures/invalid.md"
+      ...> rescue
+      ...>   e in YamlFrontMatter.Error -> e.message
+      ...> end 
+      "Error parsing yaml front matter"
+  """
+  def parse_file!(path) do
+    case parse_file(path) do
+      {:ok, matter, body} -> {matter, body}
+      {:error, :enoent} -> raise YamlFrontMatter.Error, message: "File not found"
+      {:error, _} -> raise YamlFrontMatter.Error
+    end
+  end
+
+  @doc """
   Parse a string and return it's front matter and body.
 
   Returns `{:ok, matter, body}` on success (`matter` is a map), or
@@ -57,6 +87,28 @@ defmodule YamlFrontMatter do
     string
     |> split_string
     |> process_parts
+  end
+
+  @doc """
+  Parse a string and return it's front matter and body.
+
+  Returns `{matter, body}` on success (`matter` is a map), throws on error.
+
+      iex> YamlFrontMatter.parse! "---\\ntitle: Hello\\n---\\nHello, world"
+      {%{"title" => "Hello"}, "Hello, world"}
+
+      iex> try do
+      ...>   YamlFrontMatter.parse! "---\\ntitle: Hello\\n--\\nHello, world"
+      ...> rescue
+      ...>   e in YamlFrontMatter.Error -> e.message
+      ...> end 
+      "Error parsing yaml front matter"
+  """
+  def parse!(string) do
+    case parse(string) do
+      {:ok, matter, body} -> {matter, body}
+      {:error, _} -> raise YamlFrontMatter.Error
+    end
   end
 
   defp split_string(string) do
