@@ -31,7 +31,7 @@ Add `yaml_front_matter` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:yaml_front_matter, "~> 0.2.0"}]
+  [{:yaml_front_matter, "~> 0.3.0"}]
 end
 ```
 
@@ -53,7 +53,7 @@ Please see [CHANGELOG](https://github.com/sebastiandedeyne/yaml_front_matter/blo
 
 ## Testing
 
-``` bash
+```bash
 $ mix test
 ```
 
