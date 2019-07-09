@@ -9,10 +9,10 @@ defmodule YamlFrontMatterTest do
     ---
     Hello, world
     """
-    
-    {:ok, matter, body} = YamlFrontMatter.parse string
 
-    assert Map.size(matter) == 1
+    {:ok, matter, body} = YamlFrontMatter.parse(string)
+
+    assert Kernel.map_size(matter) == 1
     assert matter["title"] == "Hello"
     assert body == "Hello, world\n"
   end
@@ -26,10 +26,10 @@ defmodule YamlFrontMatterTest do
     ---
     world
     """
-    
-    {:ok, matter, body} = YamlFrontMatter.parse string
 
-    assert Map.size(matter) == 1
+    {:ok, matter, body} = YamlFrontMatter.parse(string)
+
+    assert Kernel.map_size(matter) == 1
     assert matter["title"] == "Hello"
     assert body == "Hello\n---\nworld\n"
   end
@@ -42,8 +42,8 @@ defmodule YamlFrontMatterTest do
     ---
     Hello, world
     """
-    
-    {:error, _} = YamlFrontMatter.parse string
+
+    {:error, _} = YamlFrontMatter.parse(string)
   end
 
   test "it fails safely if there's no valid front matter" do
@@ -53,7 +53,7 @@ defmodule YamlFrontMatterTest do
     --
     Hello, world
     """
-    
-    {:error, _} = YamlFrontMatter.parse string
+
+    {:error, _} = YamlFrontMatter.parse(string)
   end
 end

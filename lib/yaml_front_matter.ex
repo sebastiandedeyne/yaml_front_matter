@@ -1,7 +1,7 @@
 defmodule YamlFrontMatter do
   @moduledoc """
-  Parse a file or string containing front matter and a document body. 
-  
+  Parse a file or string containing front matter and a document body.
+
   Front matter is a block of yaml wrapped between two lines containing `---`.
   In this example, the front matter contains `title: Hello`, and the body is
   `Hello, world`:
@@ -18,7 +18,7 @@ defmodule YamlFrontMatter do
 
   ```elixir
   YamlFrontMatter.parse_file "hello_world.md"
-  {:ok, %{"title" => "Hello"}, "Hello, world"}    
+  {:ok, %{"title" => "Hello"}, "Hello, world"}
   ```
   """
 
@@ -53,14 +53,14 @@ defmodule YamlFrontMatter do
       ...>   YamlFrontMatter.parse_file! "test/fixtures/idontexist.md"
       ...> rescue
       ...>   e in YamlFrontMatter.Error -> e.message
-      ...> end 
+      ...> end
       "File not found"
 
       iex> try do
       ...>   YamlFrontMatter.parse_file! "test/fixtures/invalid.md"
       ...> rescue
       ...>   e in YamlFrontMatter.Error -> e.message
-      ...> end 
+      ...> end
       "Error parsing yaml front matter"
   """
   def parse_file!(path) do
@@ -101,7 +101,7 @@ defmodule YamlFrontMatter do
       ...>   YamlFrontMatter.parse! "---\\ntitle: Hello\\n--\\nHello, world"
       ...> rescue
       ...>   e in YamlFrontMatter.Error -> e.message
-      ...> end 
+      ...> end
       "Error parsing yaml front matter"
   """
   def parse!(string) do
@@ -113,11 +113,11 @@ defmodule YamlFrontMatter do
 
   defp split_string(string) do
     split_pattern = ~r/[\s\r\n]---[\s\r\n]/s
-    
+
     string
     |> (&String.trim_leading(&1)).()
     |> (&("\n" <> &1)).()
-    |> (&Regex.split(split_pattern, &1, [parts: 3])).()
+    |> (&Regex.split(split_pattern, &1, parts: 3)).()
   end
 
   defp process_parts([_, yaml, body]) do
@@ -130,10 +130,9 @@ defmodule YamlFrontMatter do
   defp process_parts(_), do: {:error, :invalid_front_matter}
 
   defp parse_yaml(yaml) do
-    try do
-      {:ok, YamlElixir.read_from_string(yaml)}
-    catch
-      error -> {:error, error}
+    case YamlElixir.read_from_string(yaml) do
+      {:ok, parsed} -> {:ok, parsed}
+      error -> error
     end
   end
 end
