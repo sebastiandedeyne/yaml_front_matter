@@ -31,7 +31,7 @@ Add `yaml_front_matter` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:yaml_front_matter, "~> 0.3.0"}]
+  [{:yaml_front_matter, "~> 1.0.0"}]
 end
 ```
 
